@@ -656,6 +656,99 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/canMigrate": {
+      "post": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Checks if frontdoor can be migrated to Azure Frontdoor(Standard/Premium) profile.",
+        "operationId": "FrontDoors_CanMigrate",
+        "x-ms-examples": {
+          "FrontDoor_ValidateCustomDomain": {
+            "$ref": "./examples/FrontDoorCanMigrate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CanMigrateResult"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/migrate": {
+      "post": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Migrate the frontdoor to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.",
+        "operationId": "FrontDoors_Migrate",
+        "x-ms-examples": {
+          "FrontDoor_ValidateCustomDomain": {
+            "$ref": "./examples/FrontDoorMigrate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "migrationParameters",
+            "in": "body",
+            "description": "Properties needed to migrate the frontdoor.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateResult"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/rulesEngines": {
       "get": {
         "tags": [
@@ -953,7 +1046,22 @@
       "properties": {
         "resourceState": {
           "description": "Resource status of the Front Door.",
-          "$ref": "#/definitions/ResourceState"
+          "readOnly": true,
+          "enum": [
+            "Creating",
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Deleting",
+            "Migrating",
+            "Migrated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureFrontDoorResourceState",
+            "modelAsString": true
+          }
         },
         "provisioningState": {
           "readOnly": true,
@@ -969,6 +1077,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The Id of the frontdoor."
+        },
+        "migratedTo": {
+          "readOnly": true,
+          "description": "Reference of the Profile this is migrated to.",
+          "$ref": "./network.json#/definitions/SubResource"
         },
         "rulesEngines": {
           "readOnly": true,
@@ -997,6 +1110,108 @@
           "description": "URL to get the next set of Front Door objects if there are any."
         }
       }
+    },
+    "CanMigrateResult": {
+      "type": "object",
+      "description": "Result for canMigrate operation.",
+      "properties": {
+        "canMigrate": {
+          "readOnly": true,
+          "description": "Flag that says if the profile can be migrated",
+          "type": "boolean"
+        },
+        "defaultSku": {
+          "readOnly": true,
+          "description": "Recommended sku for the migration",
+          "type": "string",
+          "enum": [
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "x-ms-enum": {
+            "name": "CanMigrateDefaultSku",
+            "modelAsString": true
+          }
+        },
+        "errors": {
+          "readOnly": true,
+          "description": "List of validation errors",
+          "$ref": "#/definitions/MigrationErrorsListResponse"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MigrationErrorsListResponse": {
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "errors":{
+          "items": {
+            "$ref": "#/definitions/MigrationErrorType"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "MigrationErrorType": {
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "MigrationParameters": {
+      "type": "object",
+      "description": "Request body for Migrate operation.",
+      "properties": {
+        "Sku": {
+          "description": "Sku for the migration",
+          "type": "string",
+          "enum": [
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationSku",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MigrateResult": {
+      "type": "object",
+      "description": "Result for canMigrate operation.",
+      "properties": {
+        "MigratedProfileArmResourceId": {
+          "readOnly": true,
+          "description": "Arm resource id of the migrated profile",
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "MigratedWafArmResourceIds": {
+          "description": "Arm resource ids of the waf resources",
+          "type": "array",
+          "items": {
+            "description": "A reference to a origin.",
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "errors": {
+          "readOnly": true,
+          "description": "List of validation errors",
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "PurgeParameters": {
       "type": "object",

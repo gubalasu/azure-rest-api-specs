@@ -321,6 +321,16 @@
             "$ref": "#/definitions/SecurityPolicyLink"
           }
         },
+        "migratedTo": {
+          "readOnly": true,
+          "description": "Reference of the WAF policy this is migrated to.",
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "migratedFrom": {
+          "readOnly": true,
+          "description": "Reference of the WAF policy this is migrated from.",
+          "$ref": "./network.json#/definitions/SubResource"
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",

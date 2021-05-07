@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "frontDoorName": "frontDoor1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "canMigrate": true,
+        "defaultSku": "Standard_AzureFrontDoor",
+        "errors": null
+      }
+    }
+  }
+}
