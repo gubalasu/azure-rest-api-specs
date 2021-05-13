@@ -734,8 +734,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/MigrateResult"
             }
@@ -746,6 +746,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -1218,7 +1222,7 @@
         "errors": {
           "readOnly": true,
           "description": "List of validation errors",
-          "$ref": "./network.json#/definitions/SubResource"
+          "$ref": "#/definitions/MigrationErrorsListResponse"
         }
       },
       "x-ms-azure-resource": true
