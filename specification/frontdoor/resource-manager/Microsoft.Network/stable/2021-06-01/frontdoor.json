@@ -1162,8 +1162,18 @@
           "readOnly": true,
           "type": "string"
         },
-        "message": {
+        "resourceName": {
+          "description": "Resource which has the problem.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errorMessage": {
           "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "nextSteps": {
+          "description": "Describes what needs to be done to fix the problem",
           "readOnly": true,
           "type": "string"
         }
