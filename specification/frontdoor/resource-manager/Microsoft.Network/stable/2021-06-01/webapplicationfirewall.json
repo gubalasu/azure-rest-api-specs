@@ -321,15 +321,12 @@
             "$ref": "#/definitions/SecurityPolicyLink"
           }
         },
-        "migratedTo": {
-          "readOnly": true,
-          "description": "Reference of the WAF policy this is migrated to.",
-          "$ref": "./network.json#/definitions/SubResource"
-        },
-        "migratedFrom": {
-          "readOnly": true,
-          "description": "Reference of the WAF policy this is migrated from.",
-          "$ref": "./network.json#/definitions/SubResource"
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for profiles.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "provisioningState": {
           "readOnly": true,

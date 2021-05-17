@@ -1082,10 +1082,12 @@
           "type": "string",
           "description": "The Id of the frontdoor."
         },
-        "migratedTo": {
-          "readOnly": true,
-          "description": "Reference of the Profile this is migrated to.",
-          "$ref": "./network.json#/definitions/SubResource"
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for frontdoor.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "rulesEngines": {
           "readOnly": true,
@@ -1198,6 +1200,10 @@
             "name": "MigrationSku",
             "modelAsString": true
           }
+        },
+        "ProfileName": {
+          "description": "Name of the new profile that need to be created.",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true
