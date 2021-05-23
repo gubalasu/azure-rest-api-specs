@@ -396,6 +396,14 @@
             "$ref": "#/definitions/CdnEndpoint"
           }
         },
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for Web Application Firewall policy.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",

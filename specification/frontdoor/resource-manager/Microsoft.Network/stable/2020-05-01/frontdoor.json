@@ -953,7 +953,22 @@
       "properties": {
         "resourceState": {
           "description": "Resource status of the Front Door.",
-          "$ref": "#/definitions/ResourceState"
+          "readOnly": true,
+          "enum": [
+            "Creating",
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Deleting",
+            "Migrating",
+            "Migrated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureFrontDoorResourceState",
+            "modelAsString": true
+          }
         },
         "provisioningState": {
           "readOnly": true,
@@ -977,6 +992,14 @@
           "items": {
             "description": "A rules engine configuration.",
             "$ref": "#/definitions/RulesEngine"
+          }
+        },
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for frontdoor.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }

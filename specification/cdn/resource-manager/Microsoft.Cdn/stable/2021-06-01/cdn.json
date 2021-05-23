@@ -2465,7 +2465,10 @@
             "Creating",
             "Active",
             "Deleting",
-            "Disabled"
+            "Disabled",
+            "Migrating",
+            "Migrated",
+            "PendingMigrationCommit"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2482,6 +2485,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The Id of the frontdoor."
+        },
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for Profile.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },

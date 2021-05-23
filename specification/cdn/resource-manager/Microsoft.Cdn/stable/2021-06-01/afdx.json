@@ -3978,6 +3978,234 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/canMigrate": {
+      "post": {
+        "tags": [
+          "CanMigrate"
+        ],
+        "description": "Checks if the classic profile can be migrated.",
+        "operationId": "Profile_CanMigrate",
+        "x-ms-examples": {
+          "Profile_CanMigrate": {
+            "$ref": "./examples/Profile_CanMigrate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "CanMigrateInput",
+            "in": "body",
+            "description": "Checks if profile can be migrated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CanMigrateInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CanMigrateResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/import": {
+      "post": {
+        "tags": [
+          "CanMigrate"
+        ],
+        "description": "Imports classic profile to new frontdoor profile.",
+        "operationId": "Profile_Import",
+        "x-ms-examples": {
+          "Profile_Import": {
+            "$ref": "./examples/Profile_Import.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "ImportParameters",
+            "in": "body",
+            "description": "Input parameters for the import operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationCommit": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Commit the migrated Azure Frontdoor(Standard/Premium) profile.",
+        "operationId": "Profiles_MigrationCommit",
+        "x-ms-examples": {
+          "Profiles_MigrationCommit": {
+            "$ref": "./examples/Profiles_MigrationCommit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/rollback": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Rollback of the migrated profile.",
+        "operationId": "Profiles_Rollback",
+        "x-ms-examples": {
+          "Profiles_Rollback": {
+            "$ref": "./examples/Profiles_Rollback.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/abort": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Abort of the migrated profile.",
+        "operationId": "Profiles_Abort",
+        "x-ms-examples": {
+          "Profiles_Abort": {
+            "$ref": "./examples/Profiles_Abort.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -4188,6 +4416,14 @@
           "readOnly": true,
           "type": "object",
           "$ref": "#/definitions/DomainValidationProperties"
+        },
+        "extendedProperties": {
+          "description": "Key-Value pair representing additional properties for AFDDomain.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5685,6 +5921,137 @@
         }
       },
       "description": "The list usages operation response."
+    },
+    "CanMigrateInput": {
+      "type": "object",
+      "description": "Input for canMigrate operation.",
+      "properties": {
+        "ClassicResourceReference": {
+          "description": "Profile that need to be validated if it can be migrated",
+          "$ref": "cdn.json/#/definitions/ResourceReference"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CanMigrateResult": {
+      "type": "object",
+      "description": "Result for canMigrate operation.",
+      "properties": {
+        "canMigrate": {
+          "readOnly": true,
+          "description": "Flag that says if the profile can be migrated",
+          "type": "boolean"
+        },
+        "defaultSku": {
+          "readOnly": true,
+          "description": "Recommended sku for the migration",
+          "type": "string",
+          "enum": [
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "x-ms-enum": {
+            "name": "CanMigrateDefaultSku",
+            "modelAsString": true
+          }
+        },
+        "errors": {
+          "readOnly": true,
+          "description": "List of validation errors",
+          "$ref": "#/definitions/MigrationErrorsListResponse"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MigrationErrorsListResponse": {
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "errors":{
+          "items": {
+            "$ref": "#/definitions/MigrationErrorType"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "MigrationErrorType": {
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "Resource which has the problem.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "nextSteps": {
+          "description": "Describes what needs to be done to fix the problem",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ImportParameters": {
+      "type": "object",
+      "description": "Request body for Import operation.",
+      "properties": {
+        "Sku": {
+          "description": "Sku for the migration",
+          "type": "string",
+          "enum": [
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationSku",
+            "modelAsString": true
+          }
+        },
+        "ProfileName": {
+          "description": "Name of the new profile that need to be created.",
+          "type": "string"
+        },
+        "ClassicResourceReference": {
+          "description": "Profile that need to be imported",
+          "$ref": "cdn.json/#/definitions/ResourceReference"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ImportResult": {
+      "type": "object",
+      "description": "Result for canMigrate operation.",
+      "properties": {
+        "MigratedProfileArmResourceId": {
+          "readOnly": true,
+          "description": "Arm resource id of the migrated profile",
+          "$ref": "cdn.json/#/definitions/ResourceReference"
+        },
+        "MigratedWafArmResourceIds": {
+          "description": "Arm resource ids of the waf resources",
+          "type": "array",
+          "items": {
+            "description": "A reference to a origin.",
+            "$ref": "cdn.json/#/definitions/ResourceReference"
+          }
+        },
+        "errors": {
+          "readOnly": true,
+          "description": "List of validation errors",
+          "$ref": "#/definitions/MigrationErrorsListResponse"
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
