@@ -4119,7 +4119,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/rollback": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationRollback": {
       "post": {
         "tags": [
           "Migration"
@@ -5980,9 +5980,37 @@
         "ClassicResourceReference": {
           "description": "Profile that need to be migrated",
           "$ref": "cdn.json/#/definitions/ResourceReference"
+        },
+        "MigrationWafMappings": {
+          "description": "Profile that need to be migrated",
+          "$ref": "#/definitions/MigrationWafMappingsListResult"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "MigrationWafMappingObject": {
+      "properties": {
+        "migratedFrom": {
+          "$ref": "cdn.json/#/definitions/ResourceReference",
+          "description": "Classic Waf resource."
+        },
+        "migratedTo": {
+          "$ref": "cdn.json/#/definitions/ResourceReference",
+          "description": "Newly created Waf resource."
+        }
+      }
+    },
+    "MigrationWafMappingsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationWafMappingObject"
+          },
+          "description": "The list of Waf resource mappings."
+        }
+      },
+      "description": "The list usages operation response."
     },
     "MigrateResult": {
       "type": "object",
@@ -5992,14 +6020,6 @@
           "readOnly": true,
           "description": "Arm resource id of the migrated profile",
           "$ref": "cdn.json/#/definitions/ResourceReference"
-        },
-        "MigratedWafArmResourceIds": {
-          "description": "Arm resource ids of the waf resources",
-          "type": "array",
-          "items": {
-            "description": "A reference to a origin.",
-            "$ref": "cdn.json/#/definitions/ResourceReference"
-          }
         },
         "errors": {
           "readOnly": true,
