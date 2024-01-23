@@ -2998,6 +2998,15 @@
             "$ref": "#/definitions/MigrationWebApplicationFirewallMapping"
           },
           "x-ms-identifiers": []
+        },
+        "migrationEndpointMappings": {
+          "description": "Waf mapping for the migrated profile",
+          "type": "array",
+          "items": {
+            "description": "List of waf mappings",
+            "$ref": "#/definitions/MigrationEndpointMapping"
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-azure-resource": true
@@ -3013,6 +3022,20 @@
         "migratedTo": {
           "description": "Migration to Waf policy",
           "$ref": "#/definitions/ResourceReference"
+        }
+      }
+    },
+    "MigrationEndpointMapping": {
+      "description": "Endpoint Mapping ",
+      "type": "object",
+      "properties": {
+        "migratedFrom": {
+          "description": "Migrated From Endpoint name",
+          "type": "string"
+        },
+        "migratedTo": {
+          "description": "Migrated to Endpoint name",
+          "type": "string"
         }
       }
     },
