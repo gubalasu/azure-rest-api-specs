@@ -2974,8 +2974,7 @@
       "description": "Request body for Migrate operation.",
       "required": [
         "classicResourceReference",
-        "sku",
-        "profileName"
+        "sku"
       ],
       "properties": {
         "sku": {
@@ -3000,10 +2999,10 @@
           "x-ms-identifiers": []
         },
         "migrationEndpointMappings": {
-          "description": "Waf mapping for the migrated profile",
+          "description": "Endpoint mapping for the migrated profile",
           "type": "array",
           "items": {
-            "description": "List of waf mappings",
+            "description": "List of endpoint mappings",
             "$ref": "#/definitions/MigrationEndpointMapping"
           },
           "x-ms-identifiers": []
@@ -3026,7 +3025,7 @@
       }
     },
     "MigrationEndpointMapping": {
-      "description": "Endpoint Mapping ",
+      "description": "Endpoint Mapping",
       "type": "object",
       "properties": {
         "migratedFrom": {
