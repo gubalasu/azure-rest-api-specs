@@ -410,13 +410,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/canMigrate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/canMigrateToAfd": {
       "post": {
         "tags": [
           "Profiles"
         ],
         "description": "Checks if CDN profile can be migrated to Azure Frontdoor(Standard/Premium) profile.",
-        "operationId": "Profiles_CanMigrate",
+        "operationId": "CdnProfiles_CanMigrate",
         "x-ms-examples": {
           "Profiles_CanMigrate": {
             "$ref": "./examples/CdnProfiles_CanMigrate.json"
@@ -531,13 +531,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrateToAfd": {
       "post": {
         "tags": [
           "Profiles"
         ],
         "description": "Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.",
-        "operationId": "Profiles_Migrate",
+        "operationId": "CdnProfiles_Migrate",
         "x-ms-examples": {
           "Profiles_Migrate": {
             "$ref": "./examples/CdnProfiles_Migrate.json"
@@ -3203,9 +3203,7 @@
       "type": "object",
       "description": "Request body for Migrate operation.",
       "required": [
-        "classicResourceReference",
-        "sku",
-        "profileName"
+        "sku"
       ],
       "properties": {
         "sku": {
