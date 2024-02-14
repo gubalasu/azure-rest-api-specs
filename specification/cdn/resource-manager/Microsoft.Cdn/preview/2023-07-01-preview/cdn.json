@@ -410,7 +410,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/canMigrateToAfd": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/cdnCanMigrateToAfd": {
       "post": {
         "tags": [
           "Profiles"
@@ -531,7 +531,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrateToAfd": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/cdnMigrateToAfd": {
       "post": {
         "tags": [
           "Profiles"
@@ -566,7 +566,7 @@
             "name": "migrationParameters",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CdnMigrationParameters"
+              "$ref": "#/definitions/CdnMigrationToAfdParameters"
             }
           }
         ],
@@ -3199,7 +3199,7 @@
         }
       }
     },
-    "CdnMigrationParameters": {
+    "CdnMigrationToAfdParameters": {
       "type": "object",
       "description": "Request body for Migrate operation.",
       "required": [
